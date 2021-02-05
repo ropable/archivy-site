@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  archivy:
+    image: uzayg/archivy:v1.0.0
+    ports:
+      - 5111:5111
+    environment:
+      - FLASK_DEBUG=0
+      - ELASTICSEARCH_ENABLED=1
+      - ELASTICSEARCH_URL=http://elasticsearch:9200/
+    volumes:
+      - ./data:/archivy/data
+      - ./config:/archivy/.local/share/archivy
+  elasticsearch:
+    image: elasticsearch:7.9.0
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data:rw
+    environment:
+      - "discovery.type=single-node"
+
+volumes:
+  elasticsearch_data:
