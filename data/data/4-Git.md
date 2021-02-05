@@ -41,3 +41,10 @@ git diff HEAD^ HEAD requirements.txt
 # See the difference between two specific commits:
 git diff <older_sha1> <newer_sha1> requirements.txt
 ```
+
+Push a specified commit:
+
+```bash
+git push <remote name> <commit hash>:<remote branch name>
+git push origin 66d22b62t2tf354f354y563y:master
+```
