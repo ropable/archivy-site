@@ -3,8 +3,7 @@ date: 02-05-21
 id: 19
 path: Knowledge
 tags: []
-title: All the best engineering advice I stole from non-technical people | by Marianne
-  Bellotti | Medium
+title: All the best engineering advice I stole from non-technical people
 type: bookmark
 url: https://bellmar.medium.com/all-the-best-engineering-advice-i-stole-from-non-technical-people-eb7f90ca2f5f
 ---
