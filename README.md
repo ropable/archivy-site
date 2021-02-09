@@ -11,3 +11,4 @@ Setup:
 Notes:
 
 * Adjust the port number in config/config.yml and the compose file if necessary.
+* Archivy docs: https://archivy.github.io/
