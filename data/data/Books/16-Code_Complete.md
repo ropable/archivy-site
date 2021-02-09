@@ -117,8 +117,8 @@ Your position on the technology wave determines what approaches will be effectiv
 
 Different levels of design:
 
-# Software system
-# Division into subsystems/packages (Jira: components?)
-# Division into classes within packages
-# Division into data and functions within classes
-# Internal function design
+1. Software system
+1. Division into subsystems/packages
+1. Division into classes within packages
+1. Division into data and functions within classes
+1. Internal function design
