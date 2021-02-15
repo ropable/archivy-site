@@ -7,6 +7,12 @@ title: Bash
 type: note
 ---
 
+Use chmod in a more-readable form:
+
+```bash
+chmod OPTIONS {u,g,o}{+,-,=}{r,w,x} /path/to/file
+```
+
 Find a user's groups and group ID (useful if group name contains spaces):
 
 ```bash

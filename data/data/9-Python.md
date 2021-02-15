@@ -7,6 +7,13 @@ title: Python
 type: note
 ---
 
+Simple HTTP server:
+
+```python
+python3 -m http.server 8080
+python -m SimpleHTTPServer 8080
+```
+
 New-style formatting examples:
 
 ```python
