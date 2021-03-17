@@ -19,3 +19,9 @@ Find a user's groups and group ID (useful if group name contains spaces):
 id ashleyf
 # uid=1711209719(ashleyf) gid=1711200513(domain users) groups=1711200513(domain users),998(docker)
 ```
+
+Every 5 seconds, print the output of a find command:
+
+```bash
+while sleep 5; do find /path/to/files a -type f -name "buffer.*.log.meta" | wc -l; done
+```
