@@ -7,6 +7,7 @@ title: PostgreSQL
 type: note
 ---
 
+# Admin / usage
 Show the PG version in a SQL shell:
 
 ```sql
@@ -20,48 +21,7 @@ Force psql to not require SSL during connection (ref https://www.postgresql.org/
 ```
 
 Reference: https://stackoverflow.com/questions/760210/how-do-you-create-a-read-only-user-in-postgresql
-
-
-Query pg_stat_statements:
-
-```sql
-SELECT rolname, calls, total_time, mean_time, max_time, stddev_time, rows,
-    regexp_replace(query, '[ \t\n]+', ' ', 'g') AS query_text
-FROM pg_stat_statements
-JOIN pg_roles r ON r.oid = userid
-WHERE calls > 100
-AND rolname NOT LIKE '%backup'
-ORDER BY mean_time DESC
-LIMIT 15;
-```
-
-Show long-running SQL queries:
-
-```sql
-SELECT pid, usename, now() - pg_stat_activity.query_start AS duration, query, state
-FROM pg_stat_activity
-WHERE (now() - pg_stat_activity.query_start) > interval '2 minutes'
-ORDER BY duration desc;
-```
-
-Cancel a query by PID or by user:
-
-```sql
-SELECT pg_cancel_backend(pid);
-SELECT pg_cancel_backend(pid) FROM pg_stat_activity WHERE usename = 'username';
-```
-
-Display/terminate connections to a database:
-
-```sql
--- Display database connections:
-SELECT * FROM pg_stat_activity WHERE datname = 'targetdb';
--- Terminate database connection:
-SELECT pg_terminate_backend(pg_stat_activity.pid)
-FROM pg_stat_activity
-WHERE pid <> pg_backend_pid() AND pg_stat_activity.datname = 'targetdb';
-```
-
+# User management
 Create user (role) and grant:
 
 ```sql
@@ -78,6 +38,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO username;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO username;
 ```
 
+# Database size
 Get the size of all databases:
 
 ```sql
@@ -154,7 +115,48 @@ WHERE stats.schemaname = current_schema  -- Replace with any schema name
 ORDER BY live_rows ASC;
 ```
 
-! Diagnose PG database performance issues
+# Performance logging
+Query pg_stat_statements:
+
+```sql
+SELECT rolname, calls, total_time, mean_time, max_time, stddev_time, rows,
+    regexp_replace(query, '[ \t\n]+', ' ', 'g') AS query_text
+FROM pg_stat_statements
+JOIN pg_roles r ON r.oid = userid
+WHERE calls > 100
+AND rolname NOT LIKE '%backup'
+ORDER BY mean_time DESC
+LIMIT 15;
+```
+
+Show long-running SQL queries:
+
+```sql
+SELECT pid, usename, now() - pg_stat_activity.query_start AS duration, query, state
+FROM pg_stat_activity
+WHERE (now() - pg_stat_activity.query_start) > interval '2 minutes'
+ORDER BY duration desc;
+```
+
+Cancel a query by PID or by user:
+
+```sql
+SELECT pg_cancel_backend(pid);
+SELECT pg_cancel_backend(pid) FROM pg_stat_activity WHERE usename = 'username';
+```
+
+Display/terminate connections to a database:
+
+```sql
+-- Display database connections:
+SELECT * FROM pg_stat_activity WHERE datname = 'targetdb';
+-- Terminate database connection:
+SELECT pg_terminate_backend(pg_stat_activity.pid)
+FROM pg_stat_activity
+WHERE pid <> pg_backend_pid() AND pg_stat_activity.datname = 'targetdb';
+```
+
+# Diagnose performance issues
 
 Method: https://jee-appy.blogspot.com.au/2016/10/debug-postgresql-performance-issues.html
 
