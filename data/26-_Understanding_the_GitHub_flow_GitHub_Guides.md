@@ -80,7 +80,7 @@ Different teams may have different deployment strategies. For some, it may be be
 
 ## Merge
 
-![](http://kens-mate-002.lan.fyi:5111//images/gtiflow-merge.jpg)
+![](http://kens-mate-002.lan.fyi:5111//images/gitflow-merge.jpg)
 
 Now that your changes have been verified in production, it is time to merge your code into the main branch.
 
