@@ -171,3 +171,7 @@ select pg_terminate_backend(pid) from pg_stat_activity where pid=<PID>;
 SELECT max(now() - xact_start) as duration FROM pg_stat_activity WHERE state IN ('idle in transaction', 'active');
 SELECT pid, usename, datname, now() - xact_start as duration, state, query FROM pg_stat_activity WHERE state IN ('idle in transaction', 'active') order by duration desc;
 ```
+
+# Error recovery
+* https://wiki.postgresql.org/wiki/Corruption
+* https://www.postgresql.org/docs/current/app-pgresetwal.html
