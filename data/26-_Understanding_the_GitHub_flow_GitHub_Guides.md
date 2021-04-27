@@ -19,7 +19,7 @@ GitHub flow is a lightweight, branch-based workflow that supports teams and proj
 
 ## Create a branch
 
-![](http://kens-mate-002.lan.fyi:5111//images/gitflow-branch.jpg)
+![](/images/gitflow-branch.jpg)
 
 When you're working on a project, you're going to have a bunch of different features or ideas in progress at any given time – some of which are ready to go, and others which are not. Branching exists to help you manage this workflow.
 
@@ -33,7 +33,7 @@ Because of this, it's extremely important that your new branch is created off of
 
 ## Add commits
 
-![](http://kens-mate-002.lan.fyi:5111//images/gitflow-commits.jpg)
+![](/images/gitflow-commits.jpg)
 
 Once your branch has been created, it's time to start making changes. Whenever you add, edit, or delete a file, you're making a commit, and adding them to your branch. This process of adding commits keeps track of your progress as you work on a feature branch.
 
@@ -45,7 +45,7 @@ Commit messages are important, especially since Git tracks your changes and then
 
 ## Open a Pull Request
 
-![](http://kens-mate-002.lan.fyi:5111//images/gitflow-pr.jpg)
+![](/images/gitflow-pr.jpg)
 
 
 Pull Requests initiate discussion about your commits. Because they're tightly integrated with the underlying Git repository, anyone can see exactly what changes would be merged if they accept your request.
@@ -58,7 +58,7 @@ Pull Requests are useful for contributing to open source projects and for managi
 
 ## Discuss and review your code
 
-![](http://kens-mate-002.lan.fyi:5111//images/gitflow-review.jpg)
+![](/images/gitflow-review.jpg)
 
 Once a Pull Request has been opened, the person or team reviewing your changes may have questions or comments. Perhaps the coding style doesn't match project guidelines, the change is missing unit tests, or maybe everything looks great and props are in order. Pull Requests are designed to encourage and capture this type of conversation.
 
@@ -70,7 +70,7 @@ Pull Request comments are written in Markdown, so you can embed images and emoji
 
 ## Deploy
 
-![](http://kens-mate-002.lan.fyi:5111//images/gitflow-deploy.jpg)
+![](/images/gitflow-deploy.jpg)
 
 With GitHub, you can deploy from a branch for final testing in production before merging to main.
 
@@ -80,7 +80,7 @@ Different teams may have different deployment strategies. For some, it may be be
 
 ## Merge
 
-![](http://kens-mate-002.lan.fyi:5111//images/gitflow-merge.jpg)
+![](/images/gitflow-merge.jpg)
 
 Now that your changes have been verified in production, it is time to merge your code into the main branch.
 
