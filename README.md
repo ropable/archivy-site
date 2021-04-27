@@ -7,9 +7,10 @@ Setup (assumes that Docker Swarm in installed and set up):
 1. Put your own user into the group with guid 1000 too (optional but useful).
 1. Set up Docker Swarm stack like so: `docker stack deploy archivy -c docker-compose.yml`
 1. Run the `create-admin` step noted in the repo above to create a user.
-1. Open up http://localhost:5111 and log in (see note below about port no).
+1. Open up http://localhost:5111 and log in as that user (see note below about port no).
 
 Notes:
 
 * Adjust the port number in config/config.yml and the compose file if required.
+* The data in the `elasticsearch_data` Docker-managed volume is disposable.
 * Archivy docs: https://archivy.github.io/
