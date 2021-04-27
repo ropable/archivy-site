@@ -7,6 +7,15 @@ title: GDAL and ogr2ogr
 type: note
 ---
 
+# Docker image with GDAL & FileGDB support
+Repo: https://github.com/dbca-wa/gdal-image
+
+Example command to dump PostgreSQL query to file geodatabase:
+
+```bash
+docker run -it -v `pwd`:/out dbcawa/gdal-image ogr2ogr -f "FileGDB" /out/mygdb.gdb PG:"host=dbhost user=username dbname=dbname password=pw" -sql "SELECT * FROM tablename" -nlt POLYGON -lco -nln layer_name
+```
+
 # Raster GeoTIFF compression using GDAL
 
 * Source: http://blog.cleverelephant.ca/2015/02/geotiff-compression-for-dummies.html
