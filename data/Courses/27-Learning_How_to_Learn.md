@@ -343,7 +343,8 @@ Personal Summary
     Analogies/metaphors/visual images: memorable and repeated. Good to know from the Scott Young interview that it’s okay if it takes time to form these. Linking the power of visual/spatial techniques to evolutionary biology was great.
     Don’t feel too strongly about memory hacks. I feel more dissuaded from that tactic because of the inherent pointlessness of memorising facts.
 
-Module 4 - Renaissance Learning and Unlocking Your Potential
+# Module 4 - Renaissance Learning and Unlocking Your Potential
+
 How To Become A Better Learner
 
     Exercise encourages development of new neurons in the hippocampus.

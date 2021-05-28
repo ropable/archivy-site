@@ -21,26 +21,19 @@ Links:
   * pyenv tutorial: <https://amaral.northwestern.edu/resources/guides/pyenv-tutorial>
   * Poetry: <https://python-poetry.org/>
 
-
-
 # Pyenv
 
 Use **pyenv** to install different versions of Python on a host easily, and enable easy switching between them. To install, follow the [installation instructions](https://github.com/pyenv/pyenv#installation) or use the automatic installer like so (installs to local user directory, not globally):
 
-
     curl https://pyenv.run | bash
 
-
 Add the following lines to your `.bashrc`:
-
 
     export PATH="$HOME/.pyenv/bin:$PATH"
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
 
-
 Use pyenv to install different Python versions:
-
 
     pyenv install 3.7.7
     pyenv install 3.8.6
@@ -50,31 +43,29 @@ Note that the `install` command has a `--list` switch to display available Pytho
 
 
     pyenv install --list | grep 3.9
-      3.9.0a6
+      3.9.0
       3.9-dev
+      3.9.1
+      3.9.2
+      3.9.3
       miniconda-3.9.1
       miniconda3-3.9.1
 
-
 Set a global installed Python version to be used by default:
-
 
     pyenv global 3.8.6
 
-
 Set a 'default' Python version to be used upon changing to a project directory:
 
-
     pyenv local 3.7.7
-
 
 Don't add the `.python-version` file to the repository (this is a local setting); add it to `.gitignore` if necessary. If pyenv is configured properly, the presence of `.python-version` will cause it to activate the virtualenv automatically when you change into that directory.
 
 Update pyenv like so (note this requires the pyenv-update plugin, installed by default using the method outlined above):
 
-
     penv update
 
+By default, installed Python versions will be saved at `~/.pyenv/versions`
 
 # Poetry
 
@@ -82,50 +73,36 @@ pyenv comes with virtualenv but instead of that, use **Poetry** to manage virtua
 
 Install Poetry (installs to local user directory, not globally):
 
-
     curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
-
 
 Add the following line to your `.bashrc`:
 
-
     source $HOME/.poetry/env
-
 
 Inside a project directory, initialise the project dependencies:
 
-
     poetry init
-
 
 Add the `pyproject.toml` file to the project repository. Use `poetry new` instead to initialise a brand new project repository instead of `poetry init`.
 
 Set up a new virtual environment for the project:
 
-
     poetry install
 
-
 Add the `poetry.lock` file the the project repository, as this keeps track of installed library versions. Add new project dependencies (this will automatically update `pyproject.toml` and `poetry.lock`):
-
 
     poetry add requests
     poetry add Django==3.0.5
     postry add --dev ipython ipdb
 
-
 List the Poetry-managed virtual environments available to the project:
-
 
     poetry env list
     poetry env info
 
-
 Run python scripts in the virtual environment by preceding them with `poetry run`:
 
-
     poetry run python myscript.py
-
 
 # Update project Python version
 
@@ -133,27 +110,19 @@ Let's say that you want to update the Python version from 3.7 to 3.8, and you're
 
 Delete the local project venv:
 
-
     poetry env list
     poetry env remove <venv name>
 
-
 Set a new local Python version in the project (using Python 3.8.6 in this example):
-
 
     pyenv local 3.8.6
 
-
 Delete your project poetry.lock file (we'll recreate it in a second anyway), and update your pyproject.toml file to set the new Python version under `[tool.poetry.dependencies]`, e.g.:
-
 
     python = "^3.8"
 
-
 Create a new project venv using Poetry (this should recreate the poetry.lock file):
 
-
     poetry install
-
 
 Test and confirm that your project works with the new version of Python.
