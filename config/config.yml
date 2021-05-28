@@ -33,3 +33,8 @@ SEARCH_CONF:
         max_analyzed_offset: 100000000
   url: http://elasticsearch:9200
 USER_DIR: /archivy
+THEME_CONF:
+  use_custom_css: true
+  custom_css_file: mytheme.css
+SCRAPING_CONF:
+  save_images: true

@@ -10,6 +10,7 @@ services:
       - ELASTICSEARCH_ENABLED=1
       - ELASTICSEARCH_URL=http://elasticsearch:9200/
     volumes:
+      - ./css:/archivy/css
       - ./data:/archivy/data
       - ./images:/archivy/images
       - ./config:/archivy/.local/share/archivy
