@@ -7,7 +7,7 @@ Personal Archivy database based upon https://github.com/archivy/archivy-docker
 This assumes that Docker Swarm in installed and initialised:
 
 1. Clone repo locally
-1. Jigger the config, data and image directories to be writable by uid:guid 1000:1000
+1. Jigger the config, css, data and image directories to be writable by uid:guid 1000:1000
 1. Put your own user into the group with guid 1000 too (optional but useful).
 1. Set up Docker Swarm stack like so: `docker stack deploy archivy -c docker-compose.yml`
 1. Run the `create-admin` step noted in the repo above to create a user.

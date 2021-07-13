@@ -21,3 +21,11 @@ New-style formatting examples:
 >>> '{:.2f}'.format(3.14159265359)
 '3.14'
 ```
+
+# Datetime & timezones
+Simplest way to get now as TZ-aware datetime:
+
+```python
+from datetime import datetime, timezone
+datetime.now(timezone.utc)
+```

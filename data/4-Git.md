@@ -48,3 +48,37 @@ Push a specified commit:
 git push <remote name> <commit hash>:<remote branch name>
 git push origin 66d22b62t2tf354f354y563y:master
 ```
+
+Merge from another branch without commiting:
+
+```bash
+git merge --no-commit --no-ff otherbranch
+```
+
+Move your last commits to another branch:
+
+```bash
+# Create a new branch
+git branch feature/newbranch
+
+# This will create a new branch including all of the commits of the current branch.
+# Move the current branch back two commits
+git reset --keep HEAD~2
+
+# Checkout the new branch
+git checkout feature/newbranch
+```
+
+# Resolving a merge conflict
+
+Merge conflicts look like this in files:
+```
+If you have questions, please
+<<<<<<< HEAD
+open an issue
+=======
+ask your question in IRC.
+>>>>>>> branch-a
+```
+
+ Changes from the HEAD or base branch are after the line `<<<<<<< HEAD`. Next, you'll see `=======`, which divides your changes from the changes in the other branch, followed by `>>>>>>> BRANCH-NAME`.

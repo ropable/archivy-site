@@ -1,14 +1,15 @@
-version: '3'
+version: "3.8"
 
 services:
   archivy:
     image: uzayg/archivy:v1.3.0
     ports:
-      - 5111:5000
+      - "5111:5000"
     environment:
-      - FLASK_DEBUG=0
-      - ELASTICSEARCH_ENABLED=1
-      - ELASTICSEARCH_URL=http://elasticsearch:9200/
+      FLASK_DEBUG: 0
+      ELASTICSEARCH_ENABLED: 1
+      ELASTICSEARCH_URL: "http://elasticsearch:9200/"
+      HOST: "kens-mate-002.lan.fyi"
     volumes:
       - ./css:/archivy/css
       - ./data:/archivy/data

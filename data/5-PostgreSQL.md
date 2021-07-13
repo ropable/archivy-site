@@ -47,17 +47,13 @@ FROM pg_database t1
 ORDER BY pg_database_size(t1.datname) DESC;
 ```
 
-Get the size of the ten largest tables:
+Get the size of the ten largest tables in a database:
 
 ```sql
-SELECT
-t.tablename,
-pg_size_pretty(pg_total_relation_size('"' || t.schemaname || '"."' || t.tablename || '"')) AS table_total_disc_size
+SELECT t.tablename, pg_size_pretty(pg_total_relation_size('"' || t.schemaname || '"."' || t.tablename || '"')) AS table_total_disc_size
 FROM pg_tables t
-WHERE
-t.schemaname = 'public'
-ORDER BY
-pg_total_relation_size('"' || t.schemaname || '"."' || t.tablename || '"') DESC
+WHERE t.schemaname = 'public'
+ORDER BY pg_total_relation_size('"' || t.schemaname || '"."' || t.tablename || '"') DESC
 LIMIT 10;
 ```
 
