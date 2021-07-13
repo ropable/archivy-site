@@ -4,7 +4,7 @@ id: 33
 path: Links
 tags:
 - privacy
-title: Starting a new digital identity — k3tan.com
+title: Starting a new digital identity
 type: bookmark
 url: https://k3tan.com/starting-a-new-digital-identity
 ---

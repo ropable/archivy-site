@@ -7,6 +7,7 @@ title: Azure Python SDK
 type: note
 ---
 
+# Azure Blob storage API
 https://github.com/Azure/azure-storage-python
 
 Generate a blob SAS token: https://docs.microsoft.com/en-us/python/api/azure-storage-blob/azure.storage.blob?view=azure-python#azure_storage_blob_generate_blob_sas

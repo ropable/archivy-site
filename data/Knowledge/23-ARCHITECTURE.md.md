@@ -3,12 +3,12 @@ date: 02-08-21
 id: 23
 path: Knowledge
 tags: []
-title: ARCHITECTURE.md
+title: ARCHITECTURE
 type: bookmark
 url: https://matklad.github.io//2021/02/06/ARCHITECTURE.md.html
 ---
 
-# ARCHITECTURE.md
+# ARCHITECTURE
 
 Feb 6, 2021
 
