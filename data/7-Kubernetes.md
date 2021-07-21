@@ -9,6 +9,13 @@ type: note
 
 Documentation: https://kubernetes.io/docs/reference/
 
+To get creds and set context to one of the Azure clusters:
+
+```bash
+az login
+az aks get-credentials --admin --name oimaks01 --resource-group oim-appservices
+```
+
 ''kubectl ''commands:
 
 ```bash

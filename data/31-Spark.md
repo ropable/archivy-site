@@ -52,7 +52,7 @@ results = spark.sql("SELECT * FROM requests WHERE host IS NULL")
 results.show()
 
 # Use the dataframe.filter() function.
-# https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame.filter
+# https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.sql.DataFrame.filter.html#pyspark.sql.DataFrame.filter
 df.filter("host is null").show()
 df.filter("timestamp is not null").filter("host is null").show()
 # Less-magical, refer to the dataframe column (may be named or index-based):
@@ -66,12 +66,15 @@ result = df.filter(df["status"] == 200).collect()
 result[0].asDict()["host"]
 # Use a column between function in conjunction with dataframe.where to filter timestamps between two values:
 # Note that where() is just an alias of filter()
-# https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame.where
 df.where(df["timestamp"].between("2021-02-16 08:00:00",  "2021-02-16 12:00:00"))
 
 # Missing data can be handled with the na function:
 df.na.drop(subset=["host"]).show()
 df.filter("host is null").na.fill("UNKNOWN", subset=["host"]).show()
+
+# Select defined columns only:
+df.select(df.timestamp, df.host, df.path, df.method, df.status).show()
+df.select("timestamp", "host", "path").show()
 
 # Aggregation:
 hosts = df.groupBy("host")
@@ -96,10 +99,21 @@ df.withColumn("year", year("timestamp").show()
 # Create a new column called hour:
 new_df = df.withColumn("hour", hour("timestamp")).filter("hour is not null").orderBy("hour")
 # Group on the new column, then calculate the average for bytes_sent. Also reformat the number format and the column name.
-new_df.groupBy("hour").mean("bytes_sent").select(["hour", format_number('avg(bytes_sent)', 2).alias('avg_bytes_sent')]).show()azure snypse 
+new_df.groupBy("hour").mean("bytes_sent").select(["hour", format_number('avg(bytes_sent)', 2).alias('avg_bytes_sent')]).show()
+
+# Create a calculated column
+df = df.withColumn("mb_sent", df.bytes_sent / 1024 / 1024)
+# Round off a float column, and give it a nicer alias
+from pyspark.sql.functions import round
+df.select(df.timestamp, df.host, df.path, df.method, df.status, round(df.mb_sent, 2).alias("MB_sent"))
+
+# Use the regexp_extract function to extract the file extension from a string
+from pyspark.sql.functions import regexp_extract 
+df = df.withColumn("extension", regexp_extract(df.path, "\.[0-9a-z]+$", 0))
 ```
 
 # References
 * https://spark.apache.org/docs/latest/sql-programming-guide.html
 * https://luminousmen.com/post/azure-blob-storage-with-pyspark
 * https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-development-using-notebooks?tabs=classical#read-a-csv-from-azure-blob-storage-as-a-spark-dataframe
+* https://sparkbyexamples.com/pyspark/
