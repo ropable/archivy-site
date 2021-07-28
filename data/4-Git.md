@@ -55,6 +55,14 @@ Merge from another branch without commiting:
 git merge --no-commit --no-ff otherbranch
 ```
 
+Commit changes to a new branch:
+
+```bash
+git checkout -b new-branch
+git add <files>
+git commit -m <message> 
+```
+
 Move your last commits to another branch:
 
 ```bash

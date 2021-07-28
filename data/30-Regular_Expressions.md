@@ -7,4 +7,10 @@ title: Regular Expressions
 type: note
 ---
 
-Pythex: https://pythex.org/
+This one has a very nice "explain" parsing feature, plus references and cheatsheets:
+
+* RegExr: https://regexr.com/
+
+Python-specific regex tester:
+
+* Pythex: https://pythex.org/
