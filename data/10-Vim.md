@@ -9,16 +9,16 @@ type: note
 
 Delete from cursor to end of line:
 
-~~~bash
+```bash
 d$
-~~~
+```
 
 Close and open a single fold:
 
-~~~bash
+```bash
 zc
 zo
-~~~
+```
 
 Delete multi-line comment via Visual block mode: `ctrl v`, highlight block, `x`
 
@@ -31,4 +31,17 @@ Replace double quotes with single quotes:
 
 ```bash
 :%s/"\([^"]*\)"/'\1'/g
+```
+
+Record a macro in register **a**:
+
+```bash
+qa<commands><ESC>
+```
+
+Run a macro (recorded in register **a**):
+
+```bash
+@a  # Run it once
+99@a  # Run it 99 tmes
 ```
