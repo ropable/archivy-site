@@ -4,7 +4,7 @@ id: 25
 path: ''
 tags:
 - python
-title: Python virtualenv management with pyenv and Poetry
+title: Python environment management with pyenv and Poetry
 type: bookmark
 url: https://ropable.com/2020/python-pyenv-poetry.html
 ---

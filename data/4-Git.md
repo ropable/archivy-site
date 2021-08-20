@@ -39,7 +39,12 @@ Diff a file between two commits
 # See the difference in requirements.txt between now and one commit back:
 git diff HEAD^ HEAD requirements.txt
 # See the difference between two specific commits:
-git diff <older_sha1> <newer_sha1> requirements.txt
+git diff <OLDER COMMIT> <NEWER COMMIT> requirements.txt
+```
+
+See the changes made for one particular commit:
+```bash
+git show <SHA HASH>
 ```
 
 Push a specified commit:
