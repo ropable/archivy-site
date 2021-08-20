@@ -1,0 +1,105 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: elasticsearch-local
+spec:
+  selector:
+    matchLabels:
+      app: elasticsearch-test
+  replicas: 1
+  serviceName: elasticsearch-local
+  template:
+    metadata:
+      labels:
+        app: elasticsearch-test
+    spec:
+      initContainers:
+      - args:
+        - /bin/sh
+        - -c
+        - chown -R 1000:1000 /usr/share/elasticsearch/data
+        image: busybox
+        name: fix-volume-permission
+        volumeMounts:
+        - mountPath: /usr/share/elasticsearch/data
+          name: elasticsearch-local-data
+      containers:
+      - env:
+        - name: ES_JAVA_OPTS
+          value: -Xms512m -Xmx1024m
+        - name: discovery.type
+          value: single-node
+        - name: xpack.monitoring.enabled
+          value: "false"
+        - name: xpack.security.enabled
+          value: "false"
+        image: elasticsearch:7.13.4
+        name: elasticsearch-local
+        ports:
+        - containerPort: 9200
+          name: es-api
+          protocol: TCP
+        resources:
+          limits:
+            cpu: "1"
+            memory: 1Gi
+          requests:
+            memory: 512Mi
+        securityContext:
+          runAsUser: 1000
+        volumeMounts:
+        - mountPath: /usr/share/elasticsearch/data
+          name: elasticsearch-local-data
+      volumes:
+      - name: elasticsearch-local-data
+        persistentVolumeClaim:
+          claimName: elasticsearch-local-data
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: archivy-app
+spec:
+  selector:
+    matchLabels:
+      app: archivy-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: archivy-app
+    spec:
+      initContainers:
+      - args:
+        - /bin/sh
+        - -c
+        - chown -R 1000:1000 /archivy
+        image: busybox
+        name: fix-volume-permission
+        volumeMounts:
+        - mountPath: /archivy
+          name: archivy-data
+      containers:
+      - env:
+        - name: FLASK_DEBUG
+          value: "1"
+        - name: ELASTICSEARCH_ENABLED
+          value: "1"
+        - name: ELASTICSEARCH_URL
+          value: "http://elasticsearch-local:9200/"
+        - name: USER_DIR
+          value: "/archivy"
+        image: uzayg/archivy:v1.4.0
+        name: archivy-app
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+        securityContext:
+          runAsUser: 1000
+        volumeMounts:
+        - mountPath: /archivy
+          name: archivy-data
+      volumes:
+      - name: archivy-data
+        persistentVolumeClaim:
+          claimName: archivy-data

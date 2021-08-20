@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: elasticsearch-local
+spec:
+  type: ClusterIP
+  ports:
+  - name: api
+    port: 9200
+    protocol: TCP
+    targetPort: 9200
+  selector:
+    app: elasticsearch-test
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: archivy
+spec:
+  type: NodePort
+  ports:
+  - nodePort: 32222
+    port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: archivy-app
