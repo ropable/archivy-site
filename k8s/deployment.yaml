@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: elasticsearch-local
+  name: elasticsearch
 spec:
   selector:
     matchLabels:
       app: elasticsearch-test
   replicas: 1
-  serviceName: elasticsearch-local
+  serviceName: elasticsearch
   template:
     metadata:
       labels:
@@ -22,11 +22,11 @@ spec:
         name: fix-volume-permission
         volumeMounts:
         - mountPath: /usr/share/elasticsearch/data
-          name: elasticsearch-local-data
+          name: elasticsearch-data
       containers:
       - env:
         - name: ES_JAVA_OPTS
-          value: -Xms512m -Xmx1024m
+          value: -Xms512m -Xmx512m
         - name: discovery.type
           value: single-node
         - name: xpack.monitoring.enabled
@@ -34,26 +34,23 @@ spec:
         - name: xpack.security.enabled
           value: "false"
         image: elasticsearch:7.13.4
-        name: elasticsearch-local
+        name: elasticsearch
         ports:
         - containerPort: 9200
           name: es-api
           protocol: TCP
         resources:
-          limits:
-            cpu: "1"
-            memory: 1Gi
           requests:
             memory: 512Mi
         securityContext:
           runAsUser: 1000
         volumeMounts:
         - mountPath: /usr/share/elasticsearch/data
-          name: elasticsearch-local-data
+          name: elasticsearch-data
       volumes:
-      - name: elasticsearch-local-data
+      - name: elasticsearch-data
         persistentVolumeClaim:
-          claimName: elasticsearch-local-data
+          claimName: elasticsearch-data
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -82,11 +79,11 @@ spec:
       containers:
       - env:
         - name: FLASK_DEBUG
-          value: "1"
+          value: "0"
         - name: ELASTICSEARCH_ENABLED
           value: "1"
         - name: ELASTICSEARCH_URL
-          value: "http://elasticsearch-local:9200/"
+          value: "http://elasticsearch:9200/"
         - name: USER_DIR
           value: "/archivy"
         image: uzayg/archivy:v1.4.0
