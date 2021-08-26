@@ -121,6 +121,62 @@ kubectl uncordon nodename
   - Ref: https://github.com/etcd-io/website/blob/main/content/en/docs/v3.5/op-guide/recovery.md
   - Note that after running `etc snapshot restore <BACKUP FILE> --data-dir=/var/lib/etcd-from-backup` the Kubernetes etcd static pod manifest config (`/etc/kubernetes/manifest/etcd.yaml`) should be updated with the new location for the system volume.
 
+# Storage
+## Volumes
+Kubernetes uses Volumes to abstract away making  use of different kinds of storage volumes with the cluster. Volumes can be ephemeral or persistent. A Persistent Volume is a cluster-wide pool of storage volumes that is available to applications on the cluster. A Persistent Volume Claim is a 
+
+Docs: https://kubernetes.io/docs/concepts/storage/volumes/
+
+A basic persistent volume definition to manually set a path on the node as a persistent volume:
+```yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-storage
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 100Mi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: /mnt/big/volume
+  persistentVolumeReclaimPolicy: Recycle
+```
+A basic Persistent Volume Claim on that Volume:
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: claim-1
+spec:
+  accessModes:
+  - ReadWriteMany
+  volumeName: pv-storage
+  storageClassName: manual
+  resources:
+    requests:
+      storage: 50Mi
+```
+**NOTE**: depending on the Storage Class used, we may not need to define a Persistent Volume object (i.e. the PVC will provision the volume itself automatically on creation). The following PVC definition will use the **local-path** Storage class
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: application-data
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: local-path
+  volumeMode: Filesystem
+```
+
+## Storage classes
+
 # Security
 ## Security primitives
 - Host security - secure access to the cluster hosts themselves.
