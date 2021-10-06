@@ -197,9 +197,13 @@ openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text -noout
 ```
 
 # Networking
-* NodePort
-* ClusterIP
-* LoadBalancer
+Kubernetes has two network availability abstractions that allow you to expose any app without worrying about the underlying infrastructure or assigned pod IP addresses. These abstractions are the *services* and *ingresses*. They're both responsible for allowing and redirecting the traffic from external sources to our cluster. Services can be of several types. Each type changes the behavior of the applications selected by the service.
+
+* **ClusterIP**: This value exposes the applications internally only. This option allows the service to act as a port-forwarder and makes the service available within the cluster. This value is the default when omitted.
+* **NodePort**: This value exposes the service externally. It assigns each node a static port that responds to that service. When accessed through nodeIp:port, the node automatically redirects the request to an internal service of the ClusterIP type. This service then forwards the request to the applications.
+* **LoadBalancer**: This value exposes the service externally by using an Ingress controller (such as Nginx). Also, this type automatically creates a NodePort service to which the load balancer's traffic is redirected and a ClusterIP service to forward internally.
+* **ExternalName**: This value maps the service by using a DNS resolution through a CNAME record. You use this service type to direct traffic to services that exist outside the Kubernetes cluster.
+
 
 
 # Certifications

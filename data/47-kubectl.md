@@ -9,12 +9,18 @@ title: kubectl
 type: note
 ---
 
-# Rancher / k3s config
+# Rancher / k3s install
 Install Rancher from script with 
 ```bash
 curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644 --default-local-storage-path /var/www/archive/rancher/k3s/storage
 ```
 Ref: https://rancher.com/docs/k3s/latest/en/installation/install-options/how-to-flags/
+
+# Kubeconfig
+Set KUBCONFIG in `.bashrc`:
+```bash
+export KUBECONFIG=$HOME/.kube/config.local:$HOME/.kube/config.oimkube01
+```
 
 # kubectl reference
 * Reference (https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)
