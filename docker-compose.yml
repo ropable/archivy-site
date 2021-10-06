@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   archivy:
-    image: uzayg/archivy:v1.4.0
+    image: uzayg/archivy:v1.5.0
     ports:
       - "5111:5000"
     environment:
@@ -16,7 +16,7 @@ services:
       - ./images:/archivy/images
       - ./config:/archivy/.local/share/archivy
   elasticsearch:
-    image: elasticsearch:7.13.4
+    image: elasticsearch:7.14.1
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data:rw
     environment:
