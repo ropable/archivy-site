@@ -7,6 +7,7 @@ title: Git
 type: note
 ---
 
+# Common operations
 Discard changes to a file (before staging):
 
 ```bash
@@ -40,6 +41,8 @@ Diff a file between two commits
 git diff HEAD^ HEAD requirements.txt
 # See the difference between two specific commits:
 git diff <OLDER COMMIT> <NEWER COMMIT> requirements.txt
+# Get more lines of context around a diff:
+git diff -U10
 ```
 
 See the changes made for one particular commit:
@@ -58,6 +61,11 @@ Merge from another branch without commiting:
 
 ```bash
 git merge --no-commit --no-ff otherbranch
+```
+
+Abort an in-progress merge:
+```bash
+git merge --abort
 ```
 
 Commit changes to a new branch:
@@ -85,7 +93,7 @@ git checkout feature/newbranch
 # Resolving a merge conflict
 
 Merge conflicts look like this in files:
-```
+```bash
 If you have questions, please
 <<<<<<< HEAD
 open an issue
@@ -95,3 +103,20 @@ ask your question in IRC.
 ```
 
  Changes from the HEAD or base branch are after the line `<<<<<<< HEAD`. Next, you'll see `=======`, which divides your changes from the changes in the other branch, followed by `>>>>>>> BRANCH-NAME`.
+ 
+ # Errors
+ 
+ Broken pipe:
+
+```bash
+$ git push
+Counting objects: 1254, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (273/273), done.
+packet_write_wait: Connection to 13.237.44.5 port 22: Broken pipe
+fatal: The remote end hung up unexpectedly
+```
+Try to to increase the HTTP post buffer size to allow for larger chunks to be pushed up to the remote repo:
+```
+git config http.postBuffer 52428800
+```

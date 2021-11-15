@@ -196,6 +196,56 @@ View certificate details:
 openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text -noout
 ```
 
+## Authorisation
+
+Check authorisation mode(s) in use:
+```bash
+ps aux | grep kube-apiserver  # Check the authorization-mode flag for a comma separated list.
+```
+Role-based access controls (RBCA).
+```bash
+kubectl get roles
+```
+Describe the resources a role has access to:
+```bash
+kubectl -n kube-system describe role kube-proxy
+```
+Check authorisations:
+```
+kubectl auth can-i create deployments
+kubectl auth can-i delete nodes --as dev-user --namespace prod
+```
+Get users:
+```bash
+kubectl config view
+```
+Example Role and RoleBinding YAML:
+```
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: developer
+rules:
+- apiGroups: [""] # "" indicates the core API group
+  resources: ["pods"]
+  verbs: ["list", "create", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  namespace: default
+  name: dev-user-binding
+subjects:
+- kind: User
+  name: dev-user
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: developer
+  apiGroup: rbac.authorization.k8s.io
+```
+
 # Networking
 Kubernetes has two network availability abstractions that allow you to expose any app without worrying about the underlying infrastructure or assigned pod IP addresses. These abstractions are the *services* and *ingresses*. They're both responsible for allowing and redirecting the traffic from external sources to our cluster. Services can be of several types. Each type changes the behavior of the applications selected by the service.
 

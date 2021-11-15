@@ -9,38 +9,31 @@ type: bookmark
 url: https://ropable.com/2020/python-pyenv-poetry.html
 ---
 
-This is a summary of the workflow for managing Python virtual environments using more-modern tools than my usual combo of virtualenv and pip.
+This is a summary of the workflow for managing Python virtual environments using modern tools.
 
 Links:
 
-  * Hypermodern Python setup: <https://cjolowicz.github.io/posts/hypermodern-python-01-setup/>
-  * Set up an awesome Python environment: <https://towardsdatascience.com/how-to-setup-an-awesome-python-environment-for-data-science-or-anything-else-35d358cc95d5>
-  * Overview of Python dependency management tools: <https://modelpredict.com/python-dependency-management-tools>
   * pyenv: <https://github.com/pyenv/pyenv>
   * pyenv installer: <https://github.com/pyenv/pyenv-installer>
   * pyenv tutorial: <https://amaral.northwestern.edu/resources/guides/pyenv-tutorial>
   * Poetry: <https://python-poetry.org/>
+  * Hypermodern Python setup: <https://cjolowicz.github.io/posts/hypermodern-python-01-setup/>
+  * Set up an awesome Python environment: <https://towardsdatascience.com/how-to-setup-an-awesome-python-environment-for-data-science-or-anything-else-35d358cc95d5>
+  * Overview of Python dependency management tools: <https://modelpredict.com/python-dependency-management-tools>
 
 # Pyenv
 
-Use **pyenv** to install different versions of Python on a host easily, and enable easy switching between them. To install, follow the [installation instructions](https://github.com/pyenv/pyenv#installation) or use the automatic installer like so (installs to local user directory, not globally):
+Use **pyenv** to install different versions of Python on a host easily, and enable easy switching between them. To install, use the automatic installer (https://github.com/pyenv/pyenv-installer) or follow the project [installation instructions](https://github.com/pyenv/pyenv#installation). The automatic installer also includes a couple of additional plugins (pyenv-virtualenv, pyenv-update).
 
-    curl https://pyenv.run | bash
+**NOTE**: depending on the installation method and your environment, changes might be required in your `.profile` and/or `.bashrc` files.
 
-Add the following lines to your `.bashrc`:
-
-    export PATH="$HOME/.pyenv/bin:$PATH"
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
-
-Use pyenv to install different Python versions:
+Thereafter, use pyenv to install different Python versions:
 
     pyenv install 3.7.7
-    pyenv install 3.8.6
-
+    pyenv install 3.8.5
+    pyenv install 3.9.6
 
 Note that the `install` command has a `--list` switch to display available Python versions to be installed:
-
 
     pyenv install --list | grep 3.9
       3.9.0
@@ -48,36 +41,27 @@ Note that the `install` command has a `--list` switch to display available Pytho
       3.9.1
       3.9.2
       3.9.3
+      3.9.4
       miniconda-3.9.1
       miniconda3-3.9.1
 
-Set a global installed Python version to be used by default:
-
-    pyenv global 3.8.6
-
-Set a 'default' Python version to be used upon changing to a project directory:
+Set a default Python version to be used upon changing into a project directory:
 
     pyenv local 3.7.7
 
-Don't add the `.python-version` file to the repository (this is a local setting); add it to `.gitignore` if necessary. If pyenv is configured properly, the presence of `.python-version` will cause it to activate the virtualenv automatically when you change into that directory.
+Don't add the `.python-version` file to the repository (this is a local setting); add it to `.gitignore` if necessary. If pyenv is configured properly, the presence of `.python-version` will cause it to activate and use that version of Python automatically when you change into the directory.
 
 Update pyenv like so (note this requires the pyenv-update plugin, installed by default using the method outlined above):
 
     penv update
 
-By default, installed Python versions will be saved at `~/.pyenv/versions`
+By default, installed Python versions will be saved at `~/.pyenv/versions`. To remove a version, simply delete that directory.
 
 # Poetry
 
-pyenv comes with virtualenv but instead of that, use **Poetry** to manage virtual environments and dependencies (it has better dependency tree management).
+pyenv comes with pyenv-virtualenv to manage isolated Python environments. Instead of that, we're going to use **Poetry** to manage virtual environments and dependencies (it has better dependency tree management).
 
-Install Poetry (installs to local user directory, not globally):
-
-    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
-
-Add the following line to your `.bashrc`:
-
-    source $HOME/.poetry/env
+Install Poetry (installs to local user directory, not globally) according to the docs: https://python-poetry.org/docs/#installation
 
 Inside a project directory, initialise the project dependencies:
 
