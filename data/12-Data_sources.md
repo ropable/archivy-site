@@ -11,5 +11,6 @@ type: note
 
 A big list: https://public-apis.io/
 
+* JSONPlaceholder: https://jsonplaceholder.typicode.com/
 * Star Wars API: https://swapi.dev/api/?format=json
 * Punk API (beer): https://punkapi.com/documentation/v2
