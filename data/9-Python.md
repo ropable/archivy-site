@@ -40,7 +40,8 @@ def two_fer(name="you"):
     return f"One for {name}, one for me."
 ```
 
-# Datetime & timezones
+# Datetime handling
+## Timezones
 Simplest way to get now as TZ-aware datetime:
 
 ```python
@@ -57,6 +58,10 @@ from zoneinfo import ZoneInfo
 
 datetime.now(ZoneInfo("Australia/Perth"))  # AWST timezone
 ```
+## Parsing
+We can parse an ISO-formatted string using `datetime.fromisoformat`. However, this deliberately isn't a full standard-compliant parser ([reference](https://stackoverflow.com/questions/127803/how-do-i-parse-an-iso-8601-formatted-date/49784038#49784038)).
+
+A more robust solution is to install **python-dateutil** and use `dateutil.parser.parse` or `dateutil.parser.isoparse` instead.
 
 # Tricks
 Simple HTTP server:
