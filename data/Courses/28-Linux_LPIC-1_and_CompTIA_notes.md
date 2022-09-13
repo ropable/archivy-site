@@ -9,7 +9,7 @@ type: note
 
 Course URL: https://www.cbtnuggets.com/it-training/lpi-linux-lpic-1-and-comptia-linuxplus-prep
 
-Integrated Hardware Devices
+# Integrated Hardware Devices
 
 Hardware devices are present files in the /dev directory. Examples:
 
@@ -41,7 +41,7 @@ Tools:
     lspci (lists PCI devices)
     dmesg (lists system events/messages printed by kernel)
 
-Dealing with devices
+# Dealing with devices
 
 procfs - originally, process information was put into the virtual filesystem, /proc/. This worked so well, that it was used for everything and got messy.
 
@@ -72,7 +72,7 @@ Different init systems exist:
     upstart - faster startup, start order not just numerical, backwards compatible. Developed by Ubuntu, now being deprecated in favour of systemd.
     systemd - as upstart, not as backwards-compatible. Uses binary code, not just scripts.
 
-Managing runlevels with sysvinit
+# Managing runlevels with sysvinit
 
 Runlevels - define the mode of the system. Debian/Ubuntu:
 
@@ -116,7 +116,7 @@ Tools:
     shutdown -P 13:26 (powers off at time)
     shutdown -P +3 "Alas, we are powering down in 3 minutes!"
 
-Partitions and mount points
+# Partitions and mount points
 
 Hard drives can be partitioned into up to 4 logical partitions (each of which can be partitioned into multiple extended partitions).
 
@@ -132,7 +132,7 @@ GRUB2 config: /boot/grub/grub.cfg (auto-generated, not edited manually)
     Edit /etc/default/grub (sets options)
     grub-mkconfig -o /boot/grub/grub.cfg (generates grub.cfg)
 
-Using apt
+# Using apt
 
 apt-get update | upgrade | dist-upgrade | install | remove | purge
 apt-cache search | show
@@ -142,7 +142,7 @@ Repeat setup/package installation:
 
 dpkg-reconfigure PACKAGE
 
-Environment variables
+# Environment variables
 
 List all env variables: env
 
@@ -154,7 +154,7 @@ Example: PATH variable. Add to an existing PATH variable:
 
 export PATH=/my/new/path:$PATH
 
-Manipulate text
+# Manipulate text
 
 cat, head, tail, split:
 
@@ -167,7 +167,7 @@ join file1 file1  # joins lines in each file based upon a preceding identifier (
 expand
 unexpand
 
-Manipulating text with sed
+# Manipulating text with sed
 
 sed = "stream editor"
 
@@ -190,7 +190,7 @@ Do something with the results:
 
 find <location> options -exec <bash command;>
 
-Using tar, cpio and dd (archiving)
+# Using tar, cpio and dd (archiving)
 
 Block device: hard drive is divided into a number of blocks.
 
@@ -203,17 +203,20 @@ dd if=/dev/sda1 of=/tmp/backup.iso
 
 tar: originally used for tape archives.
 
+```
 tar [options] [output] [target to be archived]
 tar -cvf file.tar /home/ashleyf/projects
 tar -xvf file.tar
-
+```
+	
 cpio: takes a list of files/dirs and makes an archive.
-
+```
 ls | cpio -o > ls_archive.cpio  # takes the output of ls, redirects that to a file
 find . | cpio -ov > find_archive.cpio
 cpio -id < ls_archive.cpio  # takes a file as input, creates a list of files and directories
-
-Compressing files with gzip & bzip2
+```
+													
+# Compressing files with gzip & bzip2
 
 gzip <target>  # Will create a <target>.gz file and delete the target
 gzip bigfile.doc

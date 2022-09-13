@@ -7,6 +7,29 @@ title: Bash
 type: note
 ---
 
+# Compressing Files with gzip
+
+To compress a single file invoke the gzip command followed by the filename:
+```bash
+gzip filename
+```
+If you want to keep the input (original) file, use the -k option:
+```bash
+gzip -k filename
+```
+Use the -v option if you want to see the percentage reduction and the names of the files that are being processed:
+```bash
+gzip -v filename
+```
+To compress all files in a given directory, use the -r option:
+```bash
+gzip -r directory
+```
+To decompress a .gz file , use the -d option:
+```bash
+gzip -d filename.gz
+```
+
 # User  & group management
 To add an existing user account to a group:
 ```bash
