@@ -8,6 +8,12 @@ type: bookmark
 url: https://docs.microsoft.com/en-us/certifications/security-compliance-and-identity-fundamentals/
 ---
 
+# SC-900: Security Compliance and Identity Fundamentals
+https://learn.microsoft.com/en-us/certifications/security-compliance-and-identity-fundamentals/
+
+# Learning path: Microsoft Security, Compliance, and Identity Fundamentals: Describe the concepts of security, compliance, and identity
+https://learn.microsoft.com/en-us/training/paths/describe-concepts-of-security-compliance-identity/
+
 # Describe basic security capabilities in Azure
 
 ## Describe Azure DDoS protection

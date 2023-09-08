@@ -1,13 +1,31 @@
 ---
 date: 02-05-21
 id: 18
+modified_at: 08/27/23 23:54
 path: ''
 tags: []
 title: Bash
 type: note
 ---
 
-# Compressing Files with gzip
+# Learning tools
+- https://linuxsurvival.com/
+- https://overthewire.org/wargames/bandit/
+- https://linuxupskillchallenge.org/
+
+# Excellent CLI tools
+- fzf - https://andrew-quinn.me/fzf/
+- ripgrep - https://github.com/BurntSushi/ripgrep
+
+# Compressing files/directories
+Gzip a tar'd directory:
+```bash
+cd /mnt/nuccy
+tar --exclude='minecraft_java_server/logs' --exclude='minecraft_java_server/plugins' --exclude='minecraft_java_server/crash-reports' -zcvf minecraft_java_versus_reality.tar.gz minecraft_java_server
+
+cd /folder_to_backup
+tar --exclude='./folder' --exclude='./upload/folder2' -zcvf /backup/filename.tgz 
+```
 
 To compress a single file invoke the gzip command followed by the filename:
 ```bash
@@ -65,7 +83,6 @@ chmod u+r /path/to/file  # Give user read access to /path/to/file
 ```
 
 # Tricks
-
 Every 5 seconds, print the output of a **find** command:
 ```bash
 while sleep 5; do find /path/to/files a -type f -name "buffer.*.log.meta" | wc -l; done
@@ -74,4 +91,14 @@ while sleep 5; do find /path/to/files a -type f -name "buffer.*.log.meta" | wc -
 Find and print sorted by last modified:
 ```bash
 find . -printf "%T@ %Tc %p\n" | sort -n
+```
+
+Print $PATH as one directory per line:
+```bash
+sed 's/:/\n/g' <<< $PATH
+```
+
+To open a dashed filename (e.g. -), use the full path of the file (https://stackoverflow.com/a/42187582/14508):
+```bash
+cat ./-
 ```

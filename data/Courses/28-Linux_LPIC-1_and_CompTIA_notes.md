@@ -208,7 +208,7 @@ tar [options] [output] [target to be archived]
 tar -cvf file.tar /home/ashleyf/projects
 tar -xvf file.tar
 ```
-	
+
 cpio: takes a list of files/dirs and makes an archive.
 ```
 ls | cpio -o > ls_archive.cpio  # takes the output of ls, redirects that to a file
@@ -217,7 +217,7 @@ cpio -id < ls_archive.cpio  # takes a file as input, creates a list of files and
 ```
 													
 # Compressing files with gzip & bzip2
-
+```
 gzip <target>  # Will create a <target>.gz file and delete the target
 gzip bigfile.doc
 gunzip bigfile.doc.gz
@@ -230,8 +230,9 @@ tar -zcvf bigfile.tar.gz  bigfile.doc  # create tarball with gzip
 tar -jcvf bigfile.tar.bz2 bigfile.doc  # create tarball with bzip2
 tar -zxvf bigfile.tar.gz
 tar -jxvf bigfile.tar.bz2
-
-Standard Input (STDIN), Output (STDOUT) and Error (STDERR)
+```
+	
+# Standard Input (STDIN), Output (STDOUT) and Error (STDERR)
 
 Defaults:
 
@@ -240,60 +241,65 @@ Defaults:
     STDERR: console
 
 Redirect to/from files:
-
+```
 <  # redirects STDIN
 >  # redirects STDOUT
 2> # redirects STDERR
 ls > outfile  # redirect stdout to outfile
 ls nonexistent > outfile 2> errfile  # redirects both stdout and stderr
 read MYVAR < file.txt  # redirect stdin from a file
-
-Pipes, Data Redirection and Xargs
+```
+										 
+# Pipes, Data Redirection and Xargs
 
 Piping STDOUT of one app to STDIN of another app.
 
-# Basic redirection using pipes
+## Basic redirection using pipes
+```
 cat file.txt | grep foo
 ls | grep .mp3
+```
 
 Not every program can accept STDOUT in its STDIN (e.g. rm). For this we use xargs. We can pipe STDIN to xargs and it will run the specified command and append the input.
-
+```
 ls | xargs rm -rf  # Will delete everything returned by ls
-
+```
 tee: program that takes STDIN, prints it to the screen and redirects it to a file:
-
+```
 echo "Some output" | tee file.txt
-
+```
 Redirect STDERR back to STDOUT:
-
+```
 ls missing_dir > results.txt 2>&1   # Redirects stdout to a file, redirects stderr to stdout
-
-Foreground & background jobs
+```
+# Foreground & background jobs
 
 fg, bg, jobs
 
-# Run a job in the background via ampersand
+## Run a job in the background via ampersand
+```
 sleep 9000 &
 jobs  # List running jobs
-
+```
 Suspend a job via ctrl-z. Terminate a job via crtl-c. Use fg and bg to put jobs into the foreground and background:
-
+```
 jobs  # List running jobs
 bg %1  # Send current suspended job to background
 fg %1  # Bring nominated job to the foreground
-
+```
 Prevent a job from being closed with a terminal via nohup and disown:
-
+```
 nohup sleep 9000 &  # Prevents a job being closed with the terminal
 disown %1  # Prevent an existing running job being closed with the terminal
-
+```
 The screen program can be used to create a persistent terminal session. The current screen session can be "detached" using crtl-a, d. The screen session can then be reattached to a new terminal window:
-
+```
 screen   # Start a screen session
 # Detach using ctrl-a, then pressing d
 screen -dr   # Start screen, detaching it from any existing terminals and re-attaching it to the current terminal
+```
 
-PIDs, Signals and the kill command
+# PIDs, Signals and the kill command
 
 Every process has an id (PID). Signals include the following:
 
@@ -302,52 +308,57 @@ Every process has an id (PID). Signals include the following:
     SIGKILL (9) - Kill
     SIGTERM (15) - Terminate
 
+Examples:
+```
 sleep 1000 &  # Start a long running process in the background
 ps aux | grep sleep  # Lists any processes containing the work 'sleep'
 kill -15 <PID>
 kill -9 <PID>
+```
 
-Advanced process management
+## Advanced process management
 
 Using killall:
-
+```
 sleep 9999
 sleep 9999
 sleep 9999
 killall sleep  # Needs to be the entire process name
 killall -9 sleep
-
+```
 Using pkill & pgrep:
-
+```
 pkill sleep
 pkill slee  # Doesn't need the full name
 pgrep slee
 grep -a slee  # Includes process name
 grep -af sleep  # Searches the full execution string
+```
 
-Process priorities and nice levels
+## Process priorities and nice levels
 
 Each process has a nice level. These define how a CPU prioritises to undertake each process. Default nice level is 0, higher priority goes to -20, lower priority goes to 20.
-
+```
 -20			-10			0		10				20
 Highest				Default					Lowest
-
+```
 Starting an application with a nice level (note that the root user is the only one that can start a process with a priority higher than default):
-
+```
 nice <app>  # Default level
 nice -10 <app>  # Sets nice level as 10 (lower priority)
 nice --15 <app>  # Sets nice level as -15 (higher priority)
+```
 
-Regular expression with grep, egrep and fgrep
+# Regular expression with grep, egrep and fgrep
 
 grep: searches for text, returns lines when found. Handles basic regex.
-
+```
 grep <term> <location>
 grep foo file.txt
 cat file.txt | grep foo  # Feed STDIN to grep
 grep ^foo file.txt  # Regex: start of line
 grep "search term" --include "*.txt" .  # Search all .txt files at current location recursively.
-
+```
 Regex syntax:
 
     ^ start of line
@@ -356,32 +367,33 @@ Regex syntax:
     (X|x) or (inside a group)
 
 egrep: works with regular expressions
-
+```
 egrep '^(P\P)....$' file.txt  # Find lines starting with P or p, followed by 4 four characters and then the end of line.
-
+```
 fgrep: fast grep, doesn't evaluate regular expressions at all.
-
+```
 fgrep $$ file.txt  # Searches for literal "$$" inside file.txt
+```
 
-GPT & MBR
+# GPT & MBR
 
 MBR: Master Boot Record, introduced 1983, limitations in partition size (2 gb) and number (4 primary partitions, with extended partitions able to be presented to the OS as more than one).
 
-GPT: GUID Partition Table, new schema, backwards compatible with MBR, no limitations.
-
-BIOS: Basic Input Output Syste, only supports MBR.
-
-UEFI: Unified Extensible Firmware Interface, native GPT support.
+* **GPT**: GUID Partition Table, new schema, backwards compatible with MBR, no limitations.
+* **BIOS**: Basic Input Output Syste, only supports MBR.
+* **UEFI**: Unified Extensible Firmware Interface, native GPT support.
 
 Using MBR:
-
+```
 sudo fdisk /dev/sdX
-
+```
+	
 Using GPT:
-
+```
 sudo gdisk /dev/sdX
+```
 
-Formatting partitions in Linux
+# Formatting partitions in Linux
 
 ext2/3/4 - Extended File System. ext3/4 have journaling.
 

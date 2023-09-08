@@ -1,13 +1,27 @@
 ---
 date: 02-05-21
 id: 4
+modified_at: 08/08/23 02:00
 path: ''
 tags: []
 title: Git
 type: note
 ---
 
+A basic Git workflow:
+
+![](/images/git_workflow.jpg)
+
+The basic Git file status lifecycle:
+
+![](/images/git_file_lifecyle.jpg)
+
 # Common operations
+Revert file(s) to a specific revision:
+```bash
+git checkout <COMMIT HASH> -- file1/to/restore file2/to/restore
+```
+
 Discard changes to a file (before staging):
 ```bash
 git checkout -- <path>
@@ -107,5 +121,14 @@ Try to to increase the HTTP post buffer size to allow for larger chunks to be pu
 git config http.postBuffer 52428800
 ```
 
+# Tags
+Delete a local tag:
+```bash
+git tag --delete tagname
+```
+Delete a remote tag:
+```bash
+git push --delete origin tagname
+```
 # Links
 * https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-local-commits-in-git

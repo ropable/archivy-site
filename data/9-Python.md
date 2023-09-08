@@ -57,7 +57,17 @@ If we're using Python 3.9+, we can use the `zoneinfo` module:
 from zoneinfo import ZoneInfo
 
 datetime.now(ZoneInfo("Australia/Perth"))  # AWST timezone
+datetime(2023, 1, 1, 12, 0, tzinfo=ZoneInfo("Australia/Perth"))  # Define a full datetime.
 ```
+
+If we're using Django, use the `timezone` util function:
+```python
+from django.utils import timezone
+
+return start_time.astimezone(timezone.get_current_timezone())
+```
+
+
 ## Parsing
 We can parse an ISO-formatted string using `datetime.fromisoformat`. However, this deliberately isn't a full standard-compliant parser ([reference](https://stackoverflow.com/questions/127803/how-do-i-parse-an-iso-8601-formatted-date/49784038#49784038)).
 
