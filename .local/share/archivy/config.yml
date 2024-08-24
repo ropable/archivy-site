@@ -5,34 +5,7 @@ PORT: 5000
 SITE_TITLE: "Ashley's Archivy"
 SEARCH_CONF:
   enabled: 1
-  index_name: dataobj
-  search_conf:
-    mappings:
-      properties:
-        body:
-          analyzer: rebuilt_standard
-          type: text
-        tags:
-          analyzer: rebuilt_standard
-          type: text
-        title:
-          analyzer: rebuilt_standard
-          term_vector: with_positions_offsets
-          type: text
-    settings:
-      analysis:
-        analyzer:
-          rebuilt_standard:
-            filter:
-            - lowercase
-            - kstem
-            - trim
-            - unique
-            stopwords: _english_
-            tokenizer: standard
-      highlight:
-        max_analyzed_offset: 100000000
-  url: http://elasticsearch:9200
+  engine: ripgrep
 USER_DIR: /archivy
 THEME_CONF:
   use_theme_dark: true
