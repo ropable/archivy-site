@@ -1,7 +1,7 @@
 ---
 date: 02-05-21
 id: 18
-modified_at: 08/27/23 23:54
+modified_at: 08/13/24 01:34
 path: ''
 tags: []
 title: Bash
@@ -13,9 +13,16 @@ type: note
 - https://overthewire.org/wargames/bandit/
 - https://linuxupskillchallenge.org/
 
-# Excellent CLI tools
-- fzf - https://andrew-quinn.me/fzf/
+# Useful CLI tools
+- eza (modern `ls` replacement) - https://github.com/eza-community/eza
+- fzf (fuzzy finder) - https://andrew-quinn.me/fzf/
 - ripgrep - https://github.com/BurntSushi/ripgrep
+- bat (cat with wings) https://github.com/sharkdp/bat
+- doggo (CLI DNS for humans) - https://doggo.mrkaran.dev/docs/
+
+Lists:
+- https://news.ycombinator.com/item?id=41037197
+- https://github.com/johnalanwoods/maintained-modern-unix
 
 # Compressing files/directories
 Gzip a tar'd directory:
@@ -73,6 +80,11 @@ If you want to view a list of all groups on your system, you can use the **geten
 ```bash
 getent group
 ```
+Finding user ID on the terminal:
+```bash
+id -u <username>
+echo $UID
+```
 
 # Permissions management
 
@@ -101,4 +113,9 @@ sed 's/:/\n/g' <<< $PATH
 To open a dashed filename (e.g. -), use the full path of the file (https://stackoverflow.com/a/42187582/14508):
 ```bash
 cat ./-
+```
+
+Resolve a domain name with `getent`:
+```bash
+getent hosts r3.o.lencr.org
 ```

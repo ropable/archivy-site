@@ -1,11 +1,20 @@
 ---
 date: 02-05-21
 id: 10
+modified_at: 01/10/24 04:37
 path: ''
 tags: []
 title: Vim
 type: note
 ---
+
+# Window splits
+
+```bash
+:vs path/to/file
+:set scrollbind
+:set noscrollbind
+```
 
 # Tricks
 Delete from cursor to end of line:
